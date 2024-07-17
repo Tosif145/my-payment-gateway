@@ -11,10 +11,10 @@ docker-compose.override.yml
 docker-compose.yml
 .DS_Store
 
-# Environment variables
-.env
-.env.local
-.env.*.local
+# # Environment variables
+# .env
+# .env.local
+# .env.*.local
 
 # Build artifacts
 /build/
