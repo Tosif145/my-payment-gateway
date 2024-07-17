@@ -1,0 +1,494 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Payment Gateway API",
+    "version": "1.0.0",
+    "description": "API documentation for Payment Gateway"
+  },
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "summary": "Register a new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User registered successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login a user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payments": {
+      "post": {
+        "summary": "Create a new payment",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "payment_method": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Payment created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "payment_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/{payment_id}/process": {
+      "post": {
+        "summary": "Process a payment",
+        "parameters": [
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment processed successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "payment_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/{payment_id}": {
+      "get": {
+        "summary": "Retrieve payment status",
+        "parameters": [
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "payment_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "payment_method": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Update a payment",
+        "parameters": [
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "payment_method": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment updated successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "payment_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a payment",
+        "parameters": [
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment deleted successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/refunds/{refund_id}": {
+      "get": {
+        "summary": "Retrieve refund details",
+        "parameters": [
+          {
+            "name": "refund_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refund_id": {
+                  "type": "string"
+                },
+                "payment_id": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Refund not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/refunds/{refund_id}/process": {
+      "post": {
+        "summary": "Process a refund",
+        "parameters": [
+          {
+            "name": "refund_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Refund processed successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refund_id": {
+                  "type": "string"
+                },
+                "payment_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Refund not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

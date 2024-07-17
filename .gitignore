@@ -1,0 +1,51 @@
+# Node modules
+node_modules/
+
+# Dependency directories
+packages/
+vendor/
+
+# Docker
+.docker/
+docker-compose.override.yml
+docker-compose.yml
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+/build/
+/dist/
+*.log
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.editorconfig
+*.md
+*.doc
+*.pdf
+*.docx
+
+# Application specific files
+npm-debug.log
+yarn-error.log
+
+# Jest Coverage
+coverage/
