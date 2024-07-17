@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "app.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/docs/(.*)",
+        "dest": "/swagger/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/app.js"
+      }
+    ]
+  }
+  
