@@ -32,8 +32,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            my-payment-gateway:latest
-            my-payment-gateway:${{ github.sha }}
+            payment-gateway:latest
+            payment-gateway:${{ github.sha }}
 
       - name: Deploy to production
         run: |
